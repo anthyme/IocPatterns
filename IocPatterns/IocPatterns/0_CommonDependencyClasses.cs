@@ -7,13 +7,13 @@ using Microsoft.Practices.Unity;
 
 namespace IocPatterns
 {
-    class BusinessDependency
+    public class BusinessDependency
     {
         [Dependency]
-        public DatatAccessDependency DataAccess { get; set; }
+        public DataAccessDependency DataAccess { get; set; }
     }
 
-    class DatatAccessDependency
+    public class DataAccessDependency
     {
 
     }

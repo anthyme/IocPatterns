@@ -31,7 +31,9 @@ namespace IocPatterns
         public void TestHttpLifetimeManager()
         {
             var container = new UnityContainer();
-            container.RegisterType<DatatAccessDependency>(new HttpLifetimeManager());
+            #region spoiler
+            container.RegisterType<DataAccessDependency>(new HttpLifetimeManager());
+            #endregion
 
             HttpContext.CreateNewFakeRequest();
 
@@ -51,6 +53,7 @@ namespace IocPatterns
         }
     }
 
+    #region spoiler
     class HttpLifetimeManager : LifetimeManager
     {
         private readonly string _key;
@@ -77,4 +80,5 @@ namespace IocPatterns
             HttpContext.Current.Items.Remove(_key);
         }
     }
+    #endregion
 }

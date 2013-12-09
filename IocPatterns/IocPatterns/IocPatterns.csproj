@@ -72,11 +72,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CommonDependencyClasses.cs" />
+    <Compile Include="0_CommonDependencyClasses.cs" />
+    <Compile Include="1_HttpLifetimeManagerTests.cs" />
+    <Compile Include="2_FactoryTests.cs" />
+    <Compile Include="3_UnitOfWorkTests.cs" />
+    <Compile Include="4_AutoFactoryTests.cs" />
+    <Compile Include="5_RegisterByConventionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HttpLifetimeManagerTests.cs" />
-    <Compile Include="UnitOfWorkTests.cs" />
-    <Compile Include="FactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -8,22 +8,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IocPatterns
 {
-    class ContextParameter
+    public class ContextParameter
     {
 
     }
 
-    class ContextualDependency
+    public class ContextualDependency
     {
-        public ContextualDependency(ContextParameter parameter)
+        public ContextualDependency(ContextParameter parameter, DataAccessDependency dataAccess)
         {
             Parameter = parameter;
+            DataAccess = dataAccess;
         }
 
-        public ContextParameter Parameter { get; set; }
+        public ContextParameter Parameter { get; private set; }
+        public DataAccessDependency DataAccess { get; private set; }
     }
 
-    interface IContextualDependencyFactory
+    public interface IContextualDependencyFactory
     {
         ContextualDependency Create(ContextParameter parameter);
     }
@@ -35,7 +37,9 @@ namespace IocPatterns
         public void TestManualFactory()
         {
             var container = new UnityContainer();
+            #region spoiler
             container.RegisterType<IContextualDependencyFactory, ContextualDependencyFactory>();
+            #endregion
 
             var factory = container.Resolve<IContextualDependencyFactory>();
             var parameter = new ContextParameter();
@@ -43,9 +47,11 @@ namespace IocPatterns
             var dependency = factory.Create(parameter);
 
             dependency.Parameter.Should().BeSameAs(parameter);
+            dependency.DataAccess.Should().NotBeNull();
         }
     }
 
+    #region spoiler
     class ContextualDependencyFactory : IContextualDependencyFactory
     {
         private readonly IUnityContainer _container;
@@ -61,4 +67,5 @@ namespace IocPatterns
                 new ParameterOverride("parameter", parameter));
         }
     }
+    #endregion
 }

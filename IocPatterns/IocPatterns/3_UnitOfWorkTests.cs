@@ -6,6 +6,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IocPatterns
 {
+    class Client
+    {
+        [Dependency]
+        public BusinessDependency Service1 { get; set; }
+
+        [Dependency]
+        public BusinessDependency Service2 { get; set; }
+    }
+
     [TestClass]
     public class UnitOfWorkTests
     {
@@ -34,14 +43,7 @@ namespace IocPatterns
         }
     }
 
-    class Client
-    {
-        [Dependency]
-        public BusinessDependency Service1 { get; set; }
-        [Dependency]
-        public BusinessDependency Service2 { get; set; }
-    }
-
+    #region spoiler
     class UnitOfWork
     {
         private readonly IUnityContainer _container;
@@ -49,15 +51,16 @@ namespace IocPatterns
         public UnitOfWork(IUnityContainer container)
         {
             _container = container.CreateChildContainer();
-            DataAccess = _container.Resolve<DatatAccessDependency>();
+            DataAccess = _container.Resolve<DataAccessDependency>();
             _container.RegisterInstance(DataAccess);
         }
 
-        public DatatAccessDependency DataAccess { get; private set; }
+        public DataAccessDependency DataAccess { get; private set; }
 
         public T Create<T>()
         {
             return _container.Resolve<T>();
         }
     }
+    #endregion
 }
