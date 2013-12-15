@@ -6,20 +6,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IocPatterns
 {
-    class Client
-    {
-        [Dependency]
-        public BusinessDependency Service1 { get; set; }
-
-        [Dependency]
-        public BusinessDependency Service2 { get; set; }
-    }
-
     [TestClass]
     public class UnitOfWorkTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestUnitOfWork()
         {
             var container = new UnityContainer();
 

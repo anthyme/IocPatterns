@@ -10,9 +10,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IocPatterns
 {
-    public class Entity1 { }
+    public class User { }
 
-    public class Entity2 { }
+    public class Country { }
 
     public interface IRepository<T>
     {
@@ -23,12 +23,12 @@ namespace IocPatterns
         public void Add(T entity) { }
     }
 
-    public interface IEntity1Repository : IRepository<Entity1>
+    public interface IUserRepository : IRepository<User>
     {
         void Authenticate();
     }
 
-    public class Entity1Repository : Repository<Entity1>, IEntity1Repository {
+    public class UserRepository : Repository<User>, IUserRepository {
         public void Authenticate() { }
     }
 
@@ -48,14 +48,14 @@ namespace IocPatterns
                     .LifestyleTransient());
             #endregion
 
-            var entity1Repository = container.Resolve<IEntity1Repository>();
-            entity1Repository.GetType().Should().Be(typeof (Entity1Repository));
+            var userRepository1 = container.Resolve<IUserRepository>();
+            userRepository1.GetType().Should().Be(typeof (UserRepository));
 
-            var entity1Repository2 = container.Resolve<IRepository<Entity1>>();
-            entity1Repository2.GetType().Should().Be(typeof(Entity1Repository));
+            var userRepository2 = container.Resolve<IRepository<User>>();
+            userRepository2.GetType().Should().Be(typeof(UserRepository));
 
-            var entity2Repository = container.Resolve<IRepository<Entity2>>();
-            entity2Repository.GetType().Should().Be(typeof(Repository<Entity2>));
+            var countryRepository = container.Resolve<IRepository<Country>>();
+            countryRepository.GetType().Should().Be(typeof(Repository<Country>));
 
             #region spoiler
             //container.Register(Classes.FromAssemblyInDirectory()
@@ -63,7 +63,7 @@ namespace IocPatterns
             //container.Register(Classes.FromAssemblyNamed()
 
             //container.Register(Classes.FromThisAssembly()
-            //  .InSameNamespaceAs<Entity1Repository>()
+            //  .InSameNamespaceAs<UserRepository>()
             //  .WithService.Self()
             //  .WithService.DefaultInterfaces()
             //  .WithServiceFirstInterface()

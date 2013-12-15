@@ -7,6 +7,15 @@ using Microsoft.Practices.Unity;
 
 namespace IocPatterns
 {
+    class Client
+    {
+        [Dependency]
+        public BusinessDependency Service1 { get; set; }
+
+        [Dependency]
+        public BusinessDependency Service2 { get; set; }
+    }
+
     public class BusinessDependency
     {
         [Dependency]
