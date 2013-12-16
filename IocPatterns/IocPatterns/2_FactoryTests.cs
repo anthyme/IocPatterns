@@ -35,7 +35,7 @@ namespace IocPatterns
         {
             var container = new UnityContainer();
             #region spoiler
-            container.RegisterType<IContextualDependencyFactory, ServiceFactory>();
+            container.RegisterType<IServiceFactory, ServiceFactory>();
             #endregion
 
             var factory = container.Resolve<IServiceFactory>();
