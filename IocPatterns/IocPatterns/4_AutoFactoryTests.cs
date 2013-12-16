@@ -7,10 +7,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IocPatterns
 {
-    public interface IContextualDependencyAutoFactory
+    public interface IServiceAutoFactory
     {
-        ContextualDependency Create(ContextParameter parameter);
-        void Release(ContextualDependency businessDependency);
+        Service Create(Parameter parameter);
+        void Release(Service businessDependency);
     }
 
     [TestClass]
@@ -24,15 +24,15 @@ namespace IocPatterns
             #region spoiler
             container.AddFacility<TypedFactoryFacility>();
             container.Register(
-                Component.For<IContextualDependencyAutoFactory>().AsFactory(),
-                Component.For<DataAccessDependency>(),
-                Component.For<ContextualDependency>()
+                Component.For<IServiceAutoFactory>().AsFactory(),
+                Component.For<DataAccess>(),
+                Component.For<Service>()
                 );
             #endregion
 
-            var factory = container.Resolve<IContextualDependencyAutoFactory>();
+            var factory = container.Resolve<IServiceAutoFactory>();
 
-            var context = new ContextParameter();
+            var context = new Parameter();
             var dep = factory.Create(context);
 
             dep.Parameter.Should().BeSameAs(context);

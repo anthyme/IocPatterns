@@ -8,26 +8,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IocPatterns
 {
-    public class ContextParameter
-    {
+    public class Parameter { }
 
-    }
-
-    public class ContextualDependency
+    public class Service
     {
-        public ContextualDependency(ContextParameter parameter, DataAccessDependency dataAccess)
+        public Service(Parameter parameter, DataAccess dataAccess)
         {
             Parameter = parameter;
             DataAccess = dataAccess;
         }
 
-        public ContextParameter Parameter { get; private set; }
-        public DataAccessDependency DataAccess { get; private set; }
+        public Parameter Parameter { get; private set; }
+        public DataAccess DataAccess { get; private set; }
     }
 
-    public interface IContextualDependencyFactory
+    public interface IServiceFactory
     {
-        ContextualDependency Create(ContextParameter parameter);
+        Service Create(Parameter parameter);
     }
 
     [TestClass]
@@ -38,11 +35,11 @@ namespace IocPatterns
         {
             var container = new UnityContainer();
             #region spoiler
-            container.RegisterType<IContextualDependencyFactory, ContextualDependencyFactory>();
+            container.RegisterType<IContextualDependencyFactory, ServiceFactory>();
             #endregion
 
-            var factory = container.Resolve<IContextualDependencyFactory>();
-            var parameter = new ContextParameter();
+            var factory = container.Resolve<IServiceFactory>();
+            var parameter = new Parameter();
 
             var dependency = factory.Create(parameter);
 
@@ -52,18 +49,18 @@ namespace IocPatterns
     }
 
     #region spoiler
-    class ContextualDependencyFactory : IContextualDependencyFactory
+    class ServiceFactory : IServiceFactory
     {
         private readonly IUnityContainer _container;
 
-        public ContextualDependencyFactory(IUnityContainer container)
+        public ServiceFactory(IUnityContainer container)
         {
             _container = container;
         }
 
-        public ContextualDependency Create(ContextParameter parameter)
+        public Service Create(Parameter parameter)
         {
-            return _container.Resolve<ContextualDependency>(
+            return _container.Resolve<Service>(
                 new ParameterOverride("parameter", parameter));
         }
     }

@@ -19,10 +19,10 @@ namespace IocPatterns
     public class BusinessDependency
     {
         [Dependency]
-        public DataAccessDependency DataAccess { get; set; }
+        public DataAccess DataAccess { get; set; }
     }
 
-    public class DataAccessDependency
+    public class DataAccess
     {
 
     }

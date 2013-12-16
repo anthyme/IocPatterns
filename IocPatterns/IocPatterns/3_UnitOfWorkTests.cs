@@ -42,11 +42,11 @@ namespace IocPatterns
         public UnitOfWork(IUnityContainer container)
         {
             _container = container.CreateChildContainer();
-            DataAccess = _container.Resolve<DataAccessDependency>();
+            DataAccess = _container.Resolve<DataAccess>();
             _container.RegisterInstance(DataAccess);
         }
 
-        public DataAccessDependency DataAccess { get; private set; }
+        public DataAccess DataAccess { get; private set; }
 
         public T Create<T>()
         {

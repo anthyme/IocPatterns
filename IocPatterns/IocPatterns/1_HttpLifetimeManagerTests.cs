@@ -32,7 +32,7 @@ namespace IocPatterns
         {
             var container = new UnityContainer();
             #region spoiler
-            container.RegisterType<DataAccessDependency>(new HttpLifetimeManager());
+            container.RegisterType<DataAccess>(new HttpLifetimeManager());
             #endregion
 
             HttpContext.CreateNewFakeRequest();
