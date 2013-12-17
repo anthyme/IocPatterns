@@ -41,7 +41,6 @@ namespace IocPatterns
             var client2 = container.Resolve<Client>();
 
             client1.Service1.DataAccess.Should().BeSameAs(client1.Service2.DataAccess);
-            client2.Service1.DataAccess.Should().BeSameAs(client2.Service2.DataAccess);
             client2.Service1.DataAccess.Should().BeSameAs(client1.Service2.DataAccess);
 
             HttpContext.CreateNewFakeRequest();

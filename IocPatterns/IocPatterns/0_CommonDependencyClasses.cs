@@ -10,13 +10,13 @@ namespace IocPatterns
     class Client
     {
         [Dependency]
-        public BusinessDependency Service1 { get; set; }
+        public BusinessService Service1 { get; set; }
 
         [Dependency]
-        public BusinessDependency Service2 { get; set; }
+        public BusinessService Service2 { get; set; }
     }
 
-    public class BusinessDependency
+    public class BusinessService
     {
         [Dependency]
         public DataAccess DataAccess { get; set; }

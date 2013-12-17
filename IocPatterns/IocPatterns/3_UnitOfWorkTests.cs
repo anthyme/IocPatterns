@@ -25,10 +25,8 @@ namespace IocPatterns
             var client3 = unitOfWork.Create<Client>();
 
             client2.Service1.Should().NotBeSameAs(client2.Service2);
-            client2.Service1.DataAccess.Should().BeSameAs(client2.Service2.DataAccess);
 
-            client3.Service1.Should().NotBeSameAs(client3.Service2);
-            client3.Service1.DataAccess.Should().BeSameAs(client3.Service2.DataAccess);
+            client2.Service1.DataAccess.Should().BeSameAs(client2.Service2.DataAccess);
 
             client2.Service1.DataAccess.Should().BeSameAs(client3.Service2.DataAccess);
         }
